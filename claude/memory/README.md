@@ -46,8 +46,8 @@ Every Claude conversation automatically loads **MEMORY.md** (first ~200 lines) i
 2. Agent saves the correction to MEMORY.md or topic file
 3. Future sessions use the correction without delay
 
-Example: User says "Actually, that's Hamburg, not Berlin."
-- Immediate save to MEMORY.md: `User is based in City X (studied in City Y).`
+Example: User says "Actually, that's Portland, not Seattle."
+- Immediate save to MEMORY.md: `User is based in Portland (moved from Seattle).`
 - This prevents future agents from making the same mistake
 
 ### When Patterns Emerge (AFTER CONFIRMATION)
