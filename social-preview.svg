@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="#0d1117"/>
+
+  <!-- Subtle grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161b22" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1280" height="640" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1280" height="2" fill="#7c8aaa" opacity="0.4"/>
+
+  <!-- Terminal prompt decoration -->
+  <text x="140" y="210" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="22" fill="#7c8aaa" opacity="0.5">$</text>
+
+  <!-- Title -->
+  <text x="172" y="210" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="72" font-weight="700" fill="#e6edf3" letter-spacing="-1">claude-setup</text>
+
+  <!-- Cursor blink -->
+  <rect x="772" y="178" width="4" height="40" fill="#7c8aaa" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="1.2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Subtitle -->
+  <text x="140" y="270" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="28" fill="#8b949e" font-weight="400">Production-grade Claude Code configuration</text>
+
+  <!-- Divider line -->
+  <line x1="140" y1="310" x2="1140" y2="310" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Stat pills -->
+  <!-- Pill 1: Safety Hooks -->
+  <rect x="140" y="350" width="260" height="52" rx="26" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <circle cx="178" cy="376" r="6" fill="#7c8aaa"/>
+  <text x="198" y="383" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="20" fill="#e6edf3" font-weight="600">12</text>
+  <text x="228" y="383" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="20" fill="#8b949e" font-weight="400">Safety Hooks</text>
+
+  <!-- Pill 2: Skills -->
+  <rect x="430" y="350" width="230" height="52" rx="26" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <circle cx="468" cy="376" r="6" fill="#7c8aaa"/>
+  <text x="488" y="383" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="20" fill="#e6edf3" font-weight="600">30+</text>
+  <text x="530" y="383" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="20" fill="#8b949e" font-weight="400">Skills</text>
+
+  <!-- Pill 3: Files -->
+  <rect x="690" y="350" width="230" height="52" rx="26" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <circle cx="728" cy="376" r="6" fill="#7c8aaa"/>
+  <text x="748" y="383" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="20" fill="#e6edf3" font-weight="600">105</text>
+  <text x="788" y="383" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="20" fill="#8b949e" font-weight="400">Files</text>
+
+  <!-- Code snippet decoration -->
+  <text x="140" y="470" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="16" fill="#484f58" opacity="0.7">hooks/</text>
+  <text x="230" y="470" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="16" fill="#484f58" opacity="0.5">skills/</text>
+  <text x="320" y="470" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="16" fill="#484f58" opacity="0.3">scripts/</text>
+  <text x="430" y="470" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="16" fill="#484f58" opacity="0.2">settings.json</text>
+
+  <!-- Bottom attribution -->
+  <text x="140" y="570" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="18" fill="#484f58" font-weight="400">by</text>
+  <text x="168" y="570" font-family="'Segoe UI', Inter, -apple-system, sans-serif" font-size="18" fill="#7c8aaa" font-weight="500">BuildingOpen</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="638" width="1280" height="2" fill="#7c8aaa" opacity="0.4"/>
+</svg>

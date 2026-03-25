@@ -110,6 +110,8 @@ Two templates encoding months of iteration on making Claude Code reliable:
 
 All hooks are pure bash (no external deps beyond `jq`). See [`claude/hooks/README.md`](claude/hooks/README.md) for how hooks work, the JSON protocol, and how to wire them in `settings.json`.
 
+![Hook blocking a destructive command](assets/hook-demo.gif)
+
 **Scripts included:**
 
 | Script | Purpose |
