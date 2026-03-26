@@ -132,7 +132,7 @@ Slash commands that extend Claude's capabilities. Each skill is a `SKILL.md` fil
 <summary><strong>Full skill list by category</strong></summary>
 
 **Shipping & QA:**
-`bouncer` (Gemini quality gate), `ship` (pre-merge workflow), `qa` (autonomous testing), `debug` (systematic debugging), `target-loop` (verified iteration engine)
+`bouncer` (Gemini quality gate), `ship` (pre-merge workflow), `qa` (autonomous testing), `debug` (systematic debugging), `target-loop` (verified iteration engine), `gh-launch` (repo launch checklist)
 
 **Planning & Review:**
 `retro` (weekly retrospective), `compass` (strategic planning), `blast-radius` (impact analysis), `deep-audit` (full repo audit via Gemini), `cost` (token spend reporting)

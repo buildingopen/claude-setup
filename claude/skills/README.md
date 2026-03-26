@@ -103,6 +103,7 @@ See `skill-creator/SKILL.md` for the full guide.
 | **docx** | Create, read, edit, and manipulate Word documents (.docx files) |
 | **email-check** | Check, read, and search emails across IMAP accounts without marking as read |
 | **frontend-design** | Create distinctive, production-grade frontend interfaces with high design quality |
+| **gh-launch** | GitHub repo launch checklist: secret scan, README polish, SEO, license, go public, distribution |
 | **linkedin-copy** | Write LinkedIn posts, profile copy, and professional content |
 | **mcp-builder** | Guide for creating high-quality MCP servers in TypeScript or Python |
 | **new-project** | Scaffold a new project with standard setup, GitHub repo, and platform config |
