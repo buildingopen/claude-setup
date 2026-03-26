@@ -34,7 +34,8 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/scan-secrets-before-push.sh",
-            "timeout": 10
+            "timeout": 30,
+            "statusMessage": "Scanning for secrets"
           }
         ]
       },
