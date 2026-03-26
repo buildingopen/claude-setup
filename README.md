@@ -27,7 +27,7 @@ Most Claude Code configs share a single CLAUDE.md. This repo shares the **full s
 - [What's Included](#whats-included)
 - [CLAUDE.md Templates](#claudemd-templates)
 - [Safety Hooks](#safety-hooks)
-- [Skills (40+)](#skills-30)
+- [Skills (40+)](#skills-40)
 - [Memory System](#memory-system)
 - [Server Infrastructure](#server-infrastructure)
 - [WhatsApp & Gmail Integration](#whatsapp--gmail-integration)
@@ -46,7 +46,7 @@ cd claude-setup
 ./install.sh          # Symlinks configs into ~/.claude/
 ```
 
-That's it. The installer detects existing configs, backs them up, resolves `$HOME` paths in hook commands, and installs 12 hooks + 5 scripts + 30 skills + memory template. Run `./install.sh --copy` for standalone files instead of symlinks.
+That's it. The installer detects existing configs, backs them up, resolves `$HOME` paths in hook commands, and installs 12 hooks + 5 scripts + 40+ skills + memory template. Run `./install.sh --copy` for standalone files instead of symlinks.
 
 **After install:**
 1. Edit `~/.claude/CLAUDE.md` to match your workflow (search for `<!-- Customize -->` comments)
@@ -147,7 +147,7 @@ Slash commands that extend Claude's capabilities. Each skill is a `SKILL.md` fil
 `frontend-design`, `slide-design`, `canvas-design`, `algorithmic-art`, `linkedin-copy`, `cold-outreach`
 
 **Infrastructure & Ops:**
-`deploy` (multi-project), `docker-deploy` (self-hosted), `dns` (IONOS API), `health` (system audit), `email-check` (IMAP), `wa` (WhatsApp read/send), `mcp-builder`, `webapp-testing`, `browse` (browser automation)
+`deploy` (multi-project), `docker-deploy` (self-hosted), `dns` (DNS API), `health` (system audit), `email-check` (IMAP), `wa` (WhatsApp read/send), `mcp-builder`, `webapp-testing`, `browse` (browser automation)
 
 **Context & Recovery:**
 `vault` (context vault ops), `morning` (daily briefing), `recall` (post-compaction recovery), `session-learn` (derive skills from sessions), `issue` (multi-account GitHub issues)
