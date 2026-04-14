@@ -189,6 +189,7 @@ Templates for running Claude Code on a dedicated dev server (VPS/dedicated). Not
 <details>
 <summary><strong>What's in server/</strong></summary>
 
+- **Auth setup** - `setup-claude-auth.sh`: one-command Mac-to-server OAuth push for Claude Code Max/Pro plans
 - **Systemd services** - Chrome headless with CDP, SSHFS mounts, CDP keepalive, Docker-host proxy
 - **Safety utilities** - `safe-pipeline` (flock + timeout + cgroup memory cap), `safe-run`, stale process cleanup
 - **Browser automation** - Chrome CDP setup guide, bridge keeper for session persistence
