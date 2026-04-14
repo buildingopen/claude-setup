@@ -80,6 +80,7 @@ info "Setting ANTHROPIC_AUTH_TOKEN in ~/.bashrc on $SERVER..."
 # Use bash -s + heredoc to safely inject the dynamic token line without quoting nightmares.
 # The token is sourced from the credentials file at each login — no literal token in .bashrc.
 ssh "$SERVER" 'bash -s' <<'REMOTESCRIPT'
+touch ~/.bashrc
 sed -i '/ANTHROPIC_AUTH_TOKEN/d' ~/.bashrc
 cat >> ~/.bashrc <<'BASHLINE'
 export ANTHROPIC_AUTH_TOKEN=$(python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.claude/.credentials.json'))); print(d['claudeAiOauth']['accessToken'])" 2>/dev/null)
@@ -108,6 +109,7 @@ d['lastOnboardingVersion'] = ver
 
 with open(path, 'w') as f:
     json.dump(d, f, indent=2)
+os.chmod(path, 0o600)
 
 print(f'Onboarding marked complete for Claude Code {ver}')
 PYEOF"
@@ -117,6 +119,9 @@ ok "~/.claude.json updated"
 
 info "Verifying auth on $SERVER..."
 RESULT=$(ssh "$SERVER" "claude auth status 2>/dev/null" 2>/dev/null || true)
+if [ -z "$RESULT" ]; then
+    err "Auth verification failed: 'claude auth status' returned no output. Is Claude Code installed on $SERVER?"
+fi
 if echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); exit(0 if d.get('loggedIn') else 1)" 2>/dev/null; then
     EMAIL=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('email','unknown'))" 2>/dev/null || echo "unknown")
     ok "Authenticated as $EMAIL"
