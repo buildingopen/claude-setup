@@ -29,6 +29,21 @@ server/
 
 ## Quick Deploy
 
+### 0. Authenticate Claude Code (Max/Pro plan, from your Mac)
+
+Logging in to Claude Code on a headless Linux server via the normal OAuth flow is broken: the authorization code gets mangled on paste, and even when it succeeds the TUI shows a sign-in screen on every startup because `hasCompletedOnboarding` is missing from `~/.claude.json`.
+
+The fix: push credentials from your Mac directly.
+
+```bash
+# Run from your Mac, after logging in to Claude Code locally
+./setup-claude-auth.sh dev   # replace "dev" with your SSH alias
+```
+
+This copies your OAuth credentials from the macOS Keychain to the server and marks onboarding complete in `~/.claude.json`. Claude Code reads the credentials file natively — no env var needed. After that, `ssh dev && claude` works with no prompts.
+
+If you're using an API key instead of a Max/Pro plan, skip this step and set `ANTHROPIC_API_KEY` in the server's `~/.bashrc`.
+
 ### 1. Install safety wrappers
 ```bash
 cp safety/safe-pipeline /usr/local/bin/safe-pipeline
@@ -71,6 +86,30 @@ systemctl enable --now chrome-bridge-keeper
 ```bash
 cp terminal/tmux.conf ~/.tmux.conf
 # Add useful aliases from terminal/ scripts to your ~/.bashrc
+cp server/bashrc ~/.bashrc  # or source it from your existing ~/.bashrc
+```
+
+### 6. Auto-start sessions on boot (optional)
+
+Starts one tmux session per git repo in `/root` on every server reboot, each running `happy claude`:
+
+```bash
+cp terminal/start-claude-sessions.sh /usr/local/bin/start-claude-sessions.sh
+chmod +x /usr/local/bin/start-claude-sessions.sh
+(crontab -l 2>/dev/null; echo "@reboot /usr/local/bin/start-claude-sessions.sh") | crontab -
+```
+
+Replace `happy claude` with `claude` if you're not using Happy for mobile access.
+
+### 7. Mobile access with Happy (optional)
+
+[Happy](https://github.com/slopus/happy) gives you a mobile/web interface to control
+Claude Code sessions on the server.
+
+```bash
+npm install -g happy
+# Then start sessions with: happy claude
+# Or set as default in ~/.tmux.conf: set -g default-command "happy claude"
 ```
 
 ## Key Concepts

@@ -104,6 +104,52 @@ cq add -s backend "Add rate limiting to /api/users"
 cq status
 ```
 
+## Auto-Start on Boot (start-claude-sessions.sh)
+
+Automatically starts one tmux session per git repo when the server boots.
+Each session cds into the repo and runs `happy claude`.
+
+**Install:**
+```bash
+cp start-claude-sessions.sh /usr/local/bin/start-claude-sessions.sh
+chmod +x /usr/local/bin/start-claude-sessions.sh
+
+# Add to crontab:
+(crontab -l 2>/dev/null; echo "@reboot /usr/local/bin/start-claude-sessions.sh") | crontab -
+```
+
+**How it works:**
+
+- Scans `/root` for subdirectories containing a `.git` folder (maxdepth 2)
+- Creates a named tmux session for each repo (named after the directory)
+- Sends `happy claude` to each new session
+- Idempotent: skips repos that already have a running session
+
+**Replace `happy claude` with `claude`** if you're not using Happy for mobile access.
+
+## Happy (Mobile Access)
+
+[Happy](https://github.com/slopus/happy) provides a mobile and web interface to
+control Claude Code sessions running on a headless server.
+
+**Install:**
+```bash
+npm install -g happy
+```
+
+**Usage:**
+```bash
+# Start a session with mobile access enabled
+happy claude
+
+# Or as the tmux default-command (in tmux.conf):
+# set -g default-command "happy claude"
+```
+
+**Self-hosting vs. cloud:** The default Happy backend is the cloud service at
+`happy.slopus.com`. For self-hosted, follow the [Happy server setup guide](https://github.com/slopus/happy).
+The cloud option is simpler and fine for personal use; self-hosted gives full control.
+
 ## Aliases
 
 Useful shell aliases to add to `~/.bashrc`:
