@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `server/setup-claude-auth.sh`: one-command script that pushes Claude Code auth from a Mac to a headless Linux dev server. Extracts OAuth credentials from the macOS Keychain, copies them to the server as `~/.claude/.credentials.json`, injects `ANTHROPIC_AUTH_TOKEN` into `~/.bashrc` (read dynamically from the credentials file at login, not stored as plaintext), and marks onboarding complete in `~/.claude.json` so the theme picker never blocks startup. Replaces a painful multi-step manual process.
+- `server/setup-claude-auth.sh`: one-command script that pushes Claude Code auth from a Mac to a headless Linux dev server. Extracts OAuth credentials from the macOS Keychain, copies them to the server as `~/.claude/.credentials.json`, removes any stale `ANTHROPIC_AUTH_TOKEN` from `~/.bashrc` (Claude Code reads the credentials file natively — that env var is for API keys only and causes 401 errors with OAuth), and marks onboarding complete in `~/.claude.json` so the theme picker never blocks startup. Replaces a painful multi-step manual process.
 - `server/README.md`: Quick Deploy step 0 documenting the new auth setup flow for Max/Pro plan users, with an API key fallback note.
 
 ### Changed

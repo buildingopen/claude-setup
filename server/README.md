@@ -40,7 +40,7 @@ The fix: push credentials from your Mac directly.
 ./setup-claude-auth.sh dev   # replace "dev" with your SSH alias
 ```
 
-This copies your OAuth token from the macOS Keychain to the server, sets `ANTHROPIC_AUTH_TOKEN` in `~/.bashrc`, and marks onboarding complete in `~/.claude.json`. After that, `ssh dev && claude` works with no prompts.
+This copies your OAuth credentials from the macOS Keychain to the server and marks onboarding complete in `~/.claude.json`. Claude Code reads the credentials file natively — no env var needed. After that, `ssh dev && claude` works with no prompts.
 
 If you're using an API key instead of a Max/Pro plan, skip this step and set `ANTHROPIC_API_KEY` in the server's `~/.bashrc`.
 

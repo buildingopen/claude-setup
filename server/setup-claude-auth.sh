@@ -10,7 +10,7 @@
 # What it does:
 #   1. Extracts your OAuth credentials from the macOS Keychain
 #   2. Copies them to the server as ~/.claude/.credentials.json
-#   3. Sets ANTHROPIC_AUTH_TOKEN in ~/.bashrc (reads from credentials file at login)
+#   3. Removes any stale ANTHROPIC_AUTH_TOKEN from ~/.bashrc (that env var is for API keys only)
 #   4. Marks onboarding complete in ~/.claude.json so the theme picker doesn't block startup
 #
 # Background: Claude Code's headless OAuth flow on Linux is broken — the authorization
@@ -70,22 +70,14 @@ info "Copying credentials to $SERVER:~/.claude/.credentials.json..."
 printf '%s\n' "$CREDS" | ssh -o ConnectTimeout=10 "$SERVER" "umask 0077; mkdir -p ~/.claude; cat > ~/.claude/.credentials.json; chmod 600 ~/.claude/.credentials.json"
 ok ".credentials.json installed"
 
-# --- 4. Set ANTHROPIC_AUTH_TOKEN in .bashrc ---
-# Read the token dynamically from the credentials file at login rather than storing
-# the literal token value. This keeps ~/.bashrc free of credential plaintext and
-# automatically picks up refreshed tokens without re-running this script.
+# --- 4. Remove any stale ANTHROPIC_AUTH_TOKEN from .bashrc ---
+# Claude Code reads ~/.claude/.credentials.json natively for Max/Pro plan auth.
+# Setting ANTHROPIC_AUTH_TOKEN to an OAuth token causes "OAuth authentication is
+# currently not supported" errors because that env var is only for API keys.
 
-info "Setting ANTHROPIC_AUTH_TOKEN in ~/.bashrc on $SERVER..."
-# Use bash -s + heredoc to safely inject the dynamic token line without quoting nightmares.
-# The token is sourced from the credentials file at each login — no literal token in .bashrc.
-ssh -o ConnectTimeout=10 "$SERVER" 'bash -s' <<'REMOTESCRIPT'
-touch ~/.bashrc
-sed -i '/^export ANTHROPIC_AUTH_TOKEN=/d' ~/.bashrc
-cat >> ~/.bashrc <<'BASHLINE'
-export ANTHROPIC_AUTH_TOKEN=$(python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.claude/.credentials.json'))); print(d['claudeAiOauth']['accessToken'])" 2>/dev/null)
-BASHLINE
-REMOTESCRIPT
-ok "ANTHROPIC_AUTH_TOKEN set in ~/.bashrc (reads from credentials file)"
+info "Removing any stale ANTHROPIC_AUTH_TOKEN from ~/.bashrc on $SERVER..."
+ssh -o ConnectTimeout=10 "$SERVER" "sed -i '/^export ANTHROPIC_AUTH_TOKEN=/d' ~/.bashrc"
+ok "ANTHROPIC_AUTH_TOKEN cleared from ~/.bashrc"
 
 # --- 5. Mark onboarding complete in ~/.claude.json ---
 # Without this, Claude Code shows a theme picker on every startup because
