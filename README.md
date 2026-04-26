@@ -1,23 +1,37 @@
-# claude-setup
+# moto 🛵
 
-### Production-grade Claude Code setup, extracted from 500+ real sessions
+### A terminal IDE for AI agents, extracted from 500+ real sessions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-blueviolet)](https://docs.anthropic.com/en/docs/claude-code)
 
-A complete Claude Code source-of-truth setup: CLAUDE.md templates, 17 safety hooks, 60+ skills, the integrated `moto` remote workstation workflow, WhatsApp/Gmail integration, memory system, and cost tracking. Everything is templated for reuse with no personal data.
+`moto` is a hacked-together but production-tested terminal IDE for AI agents: Claude as the control plane, Codex for backend/infra/debugging, opencode as an optional worker, subagent workflows, Docker-first runtime, CLAUDE.md / AGENTS.md-style context, safety hooks, 60+ skills, Gmail/WhatsApp integrations, memory, browser automation, and cost tracking.
+
+This repo was formerly `buildingopen/claude-setup`. The old GitHub URL is kept for backwards compatibility through GitHub redirects after the rename.
 
 ---
 
 ## Who is this for?
 
-- **Solo developers** using Claude Code daily who want battle-tested guardrails and productivity patterns
-- **Teams** standardizing their Claude Code configuration across projects and machines
-- **Anyone who's been burned** by Claude running `rm -rf`, pushing secrets, or claiming "should work" without verifying
+- **Founders/operators** turning repeated work into software with agents
+- **Claude Code / Codex users** who want a real operating environment instead of one-off prompts
+- **Terminal-first builders** running multiple agents on a Mac + remote Linux box
+- **Teams** standardizing agent rules, hooks, skills, memory, and remote runtime
+- **Anyone burned** by agents running destructive commands, leaking secrets, or claiming success without fresh evidence
 
 ## What makes this different?
 
-Most Claude Code configs share a single CLAUDE.md. This repo shares the **full setup**: the config that lives in `~/.claude`, the hooks that enforce the rules, the skills that automate workflows, the reusable server-side patterns, and the memory system that makes Claude learn across sessions. Every pattern is extracted from real production use, not hypothetical best practices.
+Most AI coding setups are a prompt file plus a pile of tools. `moto` is the full operating environment: context, hooks, skills, memory, terminal sessions, remote server runtime, browser automation, Docker sandboxes, and launcher commands for Claude, Codex, and opencode.
+
+The philosophy is simple:
+
+- context before prompting
+- wireframes before UI code
+- Docker before SaaS integrations
+- subagents before monolithic chats
+- cheap models for mechanical checks
+- expensive models for judgment
+- complexity only after real usage earns it
 
 ---
 
@@ -43,8 +57,8 @@ Most Claude Code configs share a single CLAUDE.md. This repo shares the **full s
 ## Quick Start
 
 ```bash
-git clone https://github.com/buildingopen/claude-setup.git
-cd claude-setup
+git clone https://github.com/buildingopen/moto.git
+cd moto
 ./install.sh          # Symlinks configs into ~/.claude/
 ```
 
@@ -68,18 +82,19 @@ $EDITOR .env
 
 ## Repo Boundary
 
-`claude-setup` is the canonical home for your Claude Code setup. Install this repo locally and treat the resulting `~/.claude` as the source of truth for:
+`moto` is the canonical home for your AI-agent operating environment. Install this repo locally and treat the resulting `~/.claude` as the source of truth for:
 
 - `CLAUDE.md`, `settings.json`, and `.mcp.json`
 - Hooks, scripts, skills, and memory templates
 - The integrated Mac and server runtime in [`mac/`](mac/), [`server/`](server/), [`cron/`](cron/), [`whatsapp/`](whatsapp/), and [`gmail/`](gmail/)
 
-That includes the full `moto` command surface directly in this repo:
+It also includes the full `moto` command surface:
 
 - Mac-side iTerm tab/session orchestration
 - Reverse SSH tunnel + SSHFS wiring
 - Opinionated remote server bootstrap and recovery
 - `moto up`, `moto new`, `moto doctor`, and the full remote workflow
+- `moto newx` for Codex sessions and `moto newo` for opencode sessions
 
 Use `./install.sh` for local-only setups. Add `./install.sh mac` plus `./install.sh server-remote` when you want the full remote workstation from the same repo.
 
@@ -111,7 +126,7 @@ Two templates encoding months of iteration on making Claude Code reliable:
 | Pattern | What it does |
 |---------|-------------|
 | **Read First, Code Later** | 80% reading, 20% writing. No changes without understanding context first. |
-| **Self-Audit** | No completion claims without fresh verification evidence. Bans "should work now". |
+| **Self-Audit** | No completion claims without fresh verification evidence. Bans unverified success claims. |
 | **Rationalization Red Flags** | Table of thoughts that signal the agent is about to skip process. |
 | **Error Recovery** | Data-driven rules from 10,000+ error analysis (e.g., never retry a blocked hook). |
 | **Ripple Check** | After every change, audit the diff for env vars, dependencies, breaking changes. |
@@ -217,7 +232,7 @@ This prevents Claude from repeating mistakes across sessions and lets it build o
 
 Templates for running Claude Code on a dedicated dev server (VPS/dedicated). Not needed for local-only setups.
 
-> 🛵 **Integrated remote stack:** this repo now ships the full `moto`-compatible Mac + server workflow. The recommended path is `./install.sh mac` and `./install.sh server-remote`, which syncs the server runtime to `/opt/moto` by default for compatibility with the bundled helpers and systemd units.
+> 🛵 **Remote stack:** the recommended path is `./install.sh mac` and `./install.sh server-remote`, which syncs the server runtime to `/opt/moto` by default for compatibility with the bundled helpers and systemd units.
 
 <details>
 <summary><strong>What's in server/</strong></summary>
@@ -234,7 +249,7 @@ Templates for running Claude Code on a dedicated dev server (VPS/dedicated). Not
 
 ## Mac iTerm Workflow
 
-`claude-setup` now ships the full AX41-style tab workflow directly:
+`moto` ships the full AX41-style tab workflow directly:
 
 - [`mac/bin/moto`](mac/bin/moto) is the primary Mac CLI for opening, restoring, diagnosing, and managing remote sessions
 - [`mac/bin/claude-tabs`](mac/bin/claude-tabs) remains as a compatibility wrapper for the older tab-only command surface
@@ -317,7 +332,7 @@ After running `install.sh`:
 
 The `settings.json` file has `$HOME` paths pre-resolved by the installer. If you update the repo's `settings.json`, re-run `./install.sh` to pick up changes.
 
-For remote installs, the same `.env` also drives the bundled `moto` workflow. `./install.sh server-remote` deploys the server runtime to `/opt/moto` by default so the helper scripts and systemd units resolve a stable runtime path.
+For remote installs, the same `.env` drives the bundled remote workflow. `./install.sh server-remote` deploys the server runtime to `/opt/moto` by default so the helper scripts and systemd units resolve a stable runtime path.
 
 ---
 
@@ -327,7 +342,6 @@ Other open-source tools from BuildingOpen:
 
 | Project | Description |
 |---------|-------------|
-| **[moto](https://github.com/buildingopen/moto)** | 🛵 Standalone distribution of the remote-control workflow now bundled in this repo. Keep using it if you want the command surface by itself or need backwards compatibility with an existing install |
 | **[bouncer](https://github.com/buildingopen/bouncer)** | Independent Gemini quality gate that audits Claude Code's output before it can stop |
 | **[claude-code-stats](https://github.com/buildingopen/claude-code-stats)** | Spotify Wrapped for Claude Code. Visualize your AI coding stats, token usage, and costs |
 | **[claude-wrapped](https://github.com/buildingopen/claude-wrapped)** | Visualize your Claude Code stats with `npx claude-entropy` |

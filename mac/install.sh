@@ -19,7 +19,7 @@ fi
 [[ -n "${AX41_HOST:-}" ]] || { echo "❌ AX41_HOST not set. Copy .env.example to .env or export AX41_HOST=..." ; exit 1; }
 [[ -n "${AX41_USER:-}" ]] || { echo "❌ AX41_USER not set. Copy .env.example to .env or export AX41_USER=..." ; exit 1; }
 
-echo "━━━ claude-setup Mac install (integrated moto workflow) ━━━"
+echo "━━━ moto Mac install ━━━"
 echo "  AX41:            $AX41_USER@$AX41_HOST"
 echo "  SSH alias:       $AX41_SSH_HOST"
 echo "  Reverse port:    $MAC_REVERSE_PORT"
@@ -43,10 +43,10 @@ for f in "$REPO_DIR"/mac/shell/*.zsh; do
 done
 echo "✓ linked shell functions into $ZSH_D"
 
-if ! grep -q 'CLAUDE-SETUP:MOTO:zshrc.d' "$HOME/.zshrc" 2>/dev/null; then
+if ! grep -q 'MOTO:zshrc.d' "$HOME/.zshrc" 2>/dev/null; then
   cat >> "$HOME/.zshrc" <<'EOF'
 
-# CLAUDE-SETUP:MOTO:zshrc.d — load integrated remote shell functions
+# MOTO:zshrc.d — load remote-agent shell functions
 for _moto_f in "$HOME"/.zshrc.d/*.zsh(N); do
   [[ -r "$_moto_f" ]] && source "$_moto_f"
 done
@@ -63,7 +63,7 @@ mkdir -p "$HOME/.ssh/sockets"
 if ! grep -q "^Host $AX41_SSH_HOST$" "$SSH_CONFIG"; then
   {
     echo ""
-    echo "# ── claude-setup: integrated moto host ─────────────────────"
+    echo "# ── moto remote-agent host ─────────────────────"
     sed -e "s|__AX41_HOST__|$AX41_HOST|g" \
         -e "s|__AX41_USER__|$AX41_USER|g" \
         -e "s|__AX41_SSH_KEY__|${AX41_SSH_KEY:-~/.ssh/id_ed25519}|g" \

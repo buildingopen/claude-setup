@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# claude-setup integrated moto workflow — server installer (run on Linux as root)
+# moto server installer (run on Linux as root)
 set -euo pipefail
 
 [[ "$EUID" -ne 0 ]] && { echo "❌ run as root (sudo -i)"; exit 1; }

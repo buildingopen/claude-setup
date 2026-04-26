@@ -16,6 +16,8 @@ if tmux has-session -t "$INPUT" 2>/dev/null; then
 
     if [[ "$cmd" == "node" ]] && [[ "$cmdline" == *codex* ]]; then
         running="codex"
+    elif [[ "$cmd" == "opencode" ]]; then
+        running="opencode"
     elif [[ "$cmd" == "claude" ]]; then
         running="claude"
     else

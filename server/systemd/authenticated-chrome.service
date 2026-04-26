@@ -1,7 +1,7 @@
 [Unit]
 Description=moto — authenticated Chrome with CDP exposed on :9222
 After=network.target
-Documentation=https://github.com/buildingopen/claude-setup/blob/main/docs/browser-login.md
+Documentation=https://github.com/buildingopen/moto/blob/main/docs/browser-login.md
 
 [Service]
 Type=simple

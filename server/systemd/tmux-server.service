@@ -1,7 +1,7 @@
 [Unit]
 Description=moto — tmux persistent server (OOM-immune)
 After=network.target
-Documentation=https://github.com/buildingopen/claude-setup
+Documentation=https://github.com/buildingopen/moto
 
 [Service]
 Type=forking

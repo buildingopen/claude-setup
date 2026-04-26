@@ -1,5 +1,5 @@
 #!/bin/bash
-# install.sh - claude-setup entry point
+# install.sh - moto entry point
 #
 # Usage:
 #   ./install.sh                     Install ~/.claude from this repo
@@ -135,7 +135,7 @@ install_local() {
 
     echo ""
     echo "============================================"
-    echo "  claude-setup installer"
+    echo "  moto installer"
     echo "  Mode: $mode"
     echo "============================================"
     echo ""
@@ -216,7 +216,7 @@ install_server_remote() {
 
     local target_dir="${MOTO_REMOTE_DIR:-/opt/moto}"
 
-    info "Uploading claude-setup to $AX41_USER@$AX41_HOST:$target_dir"
+    info "Uploading moto to $AX41_USER@$AX41_HOST:$target_dir"
     rsync -az --delete \
         --exclude '.env.local' \
         --exclude '.git' \

@@ -15,8 +15,8 @@ and Ubuntu 22.04+.
 ## 1. Clone on your Mac
 
 ```bash
-git clone https://github.com/buildingopen/claude-setup.git ~/claude-setup
-cd ~/claude-setup
+git clone https://github.com/buildingopen/moto.git ~/moto
+cd ~/moto
 cp .env.example .env
 $EDITOR .env
 ```
@@ -76,7 +76,7 @@ Verify from the server:
 
 ```bash
 ssh ax41 'ssh mac hostname'
-# → should print your Mac's hostname
+# → prints your Mac's hostname
 ```
 
 ## 5. Run `moto doctor`
@@ -86,7 +86,7 @@ ssh ax41 'ssh mac hostname'
 moto doctor
 ```
 
-Every check should be green. If `reverse tunnel` is down, the SSH server on
+Every check turns green when the setup is healthy. If `reverse tunnel` is down, the SSH server on
 your Mac is likely not running, or your `~/.ssh/authorized_keys` doesn't have
 the server's key.
 

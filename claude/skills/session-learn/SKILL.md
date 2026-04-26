@@ -117,11 +117,11 @@ Check if a topic file already exists before adding to MEMORY.md directly.
 Topic files live at `~/.claude/projects/-root/memory/<topic>.md`.
 If MEMORY.md exceeds 200 lines, add to a topic file and reference it.
 
-### Sync to claude-setup repo (if applicable)
+### Sync to moto repo (if applicable)
 
 ```bash
 # Check if the skill directory is tracked by a setup repo
-ls ~/claude-setup/ 2>/dev/null || ls ~/.claude-setup/ 2>/dev/null
+ls ~/moto/ 2>/dev/null || ls ~/claude-setup/ 2>/dev/null || ls ~/.claude-setup/ 2>/dev/null
 # If it exists, copy new skill files there and commit
 ```
 

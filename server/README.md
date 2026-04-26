@@ -1,6 +1,6 @@
-# Server Setup for the Integrated Remote Workflow
+# Server Setup
 
-This directory contains the Linux-side runtime for the full `claude-setup` remote workflow. The recommended install path is from the repo root:
+This directory contains the Linux-side runtime for the full `moto` remote workflow. The recommended install path is from the repo root:
 
 ```bash
 cp .env.example .env
